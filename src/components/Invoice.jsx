@@ -1,25 +1,30 @@
-export default function Invoice({ invoice }) {
+export default function Invoice({ invoice, seller }) {
     const { info } = invoice
     const { buyer } = invoice
     const { services } = invoice
+
+    let sum = services.map(service => (service.price * service.quantity * 1.23).toFixed(2))
+    console.log(sum)
+
     return (
         <div className="max-w-[60%] font-medium">
             <div className="grid grid-cols-2 gap-14">
                 <div className="img"></div>
                 <div className='flex flex-col'>
                     <h2 className="text-center font-semibold text-lg mb-2 bg-gray-200">Data wystawienia faktury</h2>
-                    <p>{info.awayDate}</p>
+                    <p className="text-center">{info.awayDate}</p>
                 </div>
                 <div className="img"></div>
                 <div className='flex flex-col'>
                     <h2 className="text-center font-semibold text-lg mb-2 bg-gray-200">Data wykonania usługi</h2>
-                    <p>{info.finishDate}</p>
+                    <p className="text-center">{info.finishDate}</p>
                 </div>
                 <div className='flex flex-col'>
                     <h2 className="text-center font-semibold text-lg mb-2 bg-gray-200">Sprzedawca</h2>
-                    <p>Example</p>
-                    <p>Example</p>
-                    <p>Example</p>
+                    <p>{seller.company}<br />{seller.name}</p>
+                    <p>NIP: {seller.NIP}</p>
+                    <p>{seller.address}, {seller.city}</p>
+                    <p>{seller.postal} {seller.city}</p>
                 </div>
                 <div className='flex flex-col'>
                     <h2 className="text-center font-semibold text-lg mb-2 bg-gray-200 min-w-[3in]">Nabywca</h2>
@@ -40,6 +45,7 @@ export default function Invoice({ invoice }) {
                 <h3>Kwota VAT</h3>
                 <h3>Wartość brutto</h3>
                 {services.map((service, i) => <Service {...service} id={i} key={service} />)}
+                <h3 className="font-semibold colsec">Razem:</h3>
             </div>
         </div>
     )
@@ -55,8 +61,8 @@ const Service = props => {
             <p>{props.price} zł</p>
             <p>{props.price * props.quantity} zł</p>
             <p>23%</p>
-            <p>{props.price * 0.23} zł</p>
-            <p>{props.price * props.quantity * 1.23} zł</p>
+            <p>{(props.price * 0.23).toFixed(2)} zł</p>
+            <p>{(props.price * props.quantity * 1.23).toFixed(2)} zł</p>
         </>
     )
 }

@@ -2,8 +2,10 @@ import Services from "./components/Services"
 import Buyers from "./components/Buyer"
 import Info from "./components/Info"
 import Invoice from "./components/Invoice"
-import { useState } from "react"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import Credentials from "./components/Credentials"
+
+const sellerFromLocalStorage = JSON.parse(localStorage.getItem('seller'))
 
 function App() {
   const [invoice, setInvoice] = useState({
@@ -23,24 +25,27 @@ function App() {
       city: ''
     }
   })
-  const [active, setActive] = useState(false)
-
-  useEffect(() => {
-    console.log(invoice)
-  }, [invoice])
+  const [seller, setSeller] = useState(sellerFromLocalStorage)
+  const [active, setActive] = useState('home')
 
   return (
     <div className="relative flex items-center justify-center h-screen gap-14 px-10">
-      {active ? <Invoice invoice={invoice} /> : 
+      {active === 'invoice' ? <></> :
+        <div className="flex items-center absolute left-20 top-12 gap-4">
+          <h2 className="font-semibold text-xl">{seller ? seller.name : 'Sprzedawca'}</h2>
+          <button onClick={() => setActive(active === 'credentials' ? 'home' : 'credentials')} className={`${buttonStyles} ${active === 'credentials' ? 'bg-red-400' : 'bg-blue-400'}`}>{active === 'credentials' ? 'Powrót' : seller ? 'Zmień dane' : 'Dodaj dane'}</button>
+        </div>
+      }
+      {active === 'invoice' ? seller ? <Invoice invoice={invoice} seller={seller} /> : <button onClick={() => setActive('credentials')} className='text-red-400 font-semibold text-2xl'>Dodaj dane sprzedawcy</button> : active === 'credentials' ? <Credentials cred={seller} setCred={setSeller} /> :
       <>
         <Info setInvoice={setInvoice} invoice={invoice.info} />
         <Services setInvoice={setInvoice} invoice={invoice.services} />
         <Buyers setInvoice={setInvoice} invoice={invoice.buyer} />
       </>}
-      <div className="absolute bottom-14 flex items-center gap-4">
-        <button onClick={() => setActive(prev => !prev)} className={`${buttonStyles} ${active ? 'bg-red-400' : 'bg-green-400'}`}>{active ? 'Powrót' : 'Wygeneruj fakturę'}</button>
-        {active ? <button className={`${buttonStyles} bg-green-400`}>Drukuj</button> : <></>}
-      </div>
+      {active === 'credentials' ? <></> : <div className="absolute bottom-14 flex items-center gap-4">
+        <button onClick={() => setActive(active === 'invoice' ? 'home' : 'invoice')} className={`${buttonStyles} ${active === 'invoice' ? 'bg-red-400' : 'bg-green-400'}`}>{active === 'invoice' ? 'Powrót' : 'Wygeneruj fakturę'}</button>
+        {active === 'invoice' && seller ? <button className={`${buttonStyles} bg-green-400`}>Drukuj</button> : <></>}
+      </div>}
     </div>
   )
 }

@@ -42,9 +42,9 @@ function App() {
         <Services setInvoice={setInvoice} invoice={invoice.services} />
         <Buyers setInvoice={setInvoice} invoice={invoice.buyer} />
       </>}
-      {active === 'credentials' ? <></> : <div className="absolute bottom-14 flex items-center gap-4">
+      {active === 'credentials' ? <></> : <div className="absolute bottom-14 flex items-center gap-4 print:hidden">
         <button onClick={() => setActive(active === 'invoice' ? 'home' : 'invoice')} className={`${buttonStyles} ${active === 'invoice' ? 'bg-red-400' : 'bg-green-400'}`}>{active === 'invoice' ? 'Powrót' : 'Wygeneruj fakturę'}</button>
-        {active === 'invoice' && seller ? <button className={`${buttonStyles} bg-green-400`}>Drukuj</button> : <></>}
+        {active === 'invoice' && seller ? <button onClick={() => window.print()} className={`${buttonStyles} bg-green-400`}>Drukuj</button> : <></>}
       </div>}
     </div>
   )

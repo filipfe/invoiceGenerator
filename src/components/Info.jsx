@@ -9,7 +9,7 @@ export default function Info({setInvoice, invoice}) {
         <div className="flex flex-col">
             <div className="flex items-center gap-4 justify-between mb-4">
                 <h2 className="font-semibold text-2xl">Ogólne informacje</h2>
-                {!active ? <button className={`${buttonStyles} bg-blue-400 hover:bg-blue-600 transition-colors`} onClick={() => setActive(true)}>Dodaj</button> : <></>}
+                {!active ? <button className={`${buttonStyles} bg-blue-400 hover:bg-blue-600 transition-colors`} onClick={() => setActive(true)}>Add</button> : <></>}
             </div>
             {active ?
                 <>
@@ -21,7 +21,7 @@ export default function Info({setInvoice, invoice}) {
                             payment: '',
                             paymentDate: ''
                         }}
-                    })}}>Usuń</button>
+                    })}}>Delete</button>
                 </>
              : <></>}
         </div>
@@ -42,13 +42,13 @@ const Form = ({setInvoice, invoice}) => {
 
     return (
         <>
-            <label htmlFor="wystawienie">Data wystawienia</label>
+            <label htmlFor="wystawienie">Date of publish</label>
             <input className={inputStyles} value={info.awayDate} onChange={e => setInfo({...info, awayDate: e.target.value})} type="date" id='wystawienie' name='wystawienie' />
-            <label htmlFor="wykonanie">Data wykonania usługi</label>
+            <label htmlFor="wykonanie">Date of service</label>
             <input className={inputStyles} value={info.finishDate} onChange={e => setInfo({...info, finishDate: e.target.value})} type="date" id='wykonanie' name='wykonanie' />
-            <label htmlFor="platnosc">Sposób płatności</label>
+            <label htmlFor="platnosc">Payment method</label>
             <input className={inputStyles} value={info.payment} onChange={e => setInfo({...info, payment: e.target.value})} type="text" id='platnosc' name='platnosc' />
-            <label htmlFor="terminplatnosci">Termin płatności</label>
+            <label htmlFor="terminplatnosci">Date of payment</label>
             <input className={inputStyles} value={info.paymentDate} onChange={e => setInfo({...info, paymentDate: e.target.value})} type="date" id='terminplatnosci' name='terminplatnosci' />
         </>
     )

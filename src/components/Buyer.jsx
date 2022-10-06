@@ -9,7 +9,7 @@ export default function Buyers({ setInvoice, invoice }) {
         <div className="flex flex-col">
             <div className="flex items-center gap-4 justify-between mb-4">
                 <h2 className="font-semibold text-2xl">Nabywca</h2>
-                {!buyer ? <button className={`${buttonStyles} bg-blue-400 hover:bg-blue-600 transition-colors`} onClick={() => setBuyer(true)}>Nowy</button> : <></>}
+                {!buyer ? <button className={`${buttonStyles} bg-blue-400 hover:bg-blue-600 transition-colors`} onClick={() => setBuyer(true)}>New</button> : <></>}
             </div>
             {buyer ?
                 <>
@@ -23,7 +23,7 @@ export default function Buyers({ setInvoice, invoice }) {
                             postal: '',
                             city: ''
                         }}
-                    })}}>Usuń</button>
+                    })}}>Delete</button>
                 </>
              : <></>}
         </div>
@@ -44,17 +44,17 @@ const Buyer = ({ setInvoice, invoice }) => {
 
     return (
         <>
-            <label htmlFor="name">Imię i nazwisko</label>
+            <label htmlFor="name">Full name</label>
             <input className={inputStyles} value={buyer.name} onChange={e => setBuyer({...buyer, name: e.target.value})} type="text" id='name' name='name' />
-            <label htmlFor="firma">Firma</label>
+            <label htmlFor="firma">Company</label>
             <input className={inputStyles} value={buyer.company} onChange={e => setBuyer({...buyer, company: e.target.value})} type="text" id='firma' name='firma' />
             <label htmlFor="nip">NIP</label>
             <input className={inputStyles} value={buyer.NIP} onChange={e => setBuyer({...buyer, NIP: e.target.value})} type="text" id='nip' name='nip' />
-            <label htmlFor="adres">Adres</label>
+            <label htmlFor="adres">Address</label>
             <input className={inputStyles} value={buyer.address} onChange={e => setBuyer({...buyer, address: e.target.value})} type="text" id='adres' name='adres' />
-            <label htmlFor="kod">Kod pocztowy</label>
+            <label htmlFor="kod">Postal code</label>
             <input className={inputStyles} value={buyer.postal} onChange={e => setBuyer({...buyer, postal: e.target.value})} type="text" id='kod' name='kod' />
-            <label htmlFor="Miasto">Miasto</label>
+            <label htmlFor="Miasto">City</label>
             <input className={inputStyles} value={buyer.city} onChange={e => setBuyer({...buyer, city: e.target.value})} type="text" id='miasto' name='miasto' />
         </>
     )

@@ -24,7 +24,7 @@ export default function Services({setInvoice, invoice}) {
                         quantity: '',
                         price: ''
                     }
-                ))}>Nowa</button>
+                ))}>New</button>
             </div>
             <div className="flex flex-wrap gap-4">
                 {services.map((serv, i) => <Service i={i} setServices={setServices} services={services} key={i} />)}
@@ -36,25 +36,25 @@ export default function Services({setInvoice, invoice}) {
 const Service = ({ i, setServices, services }) => {
     return (
         <div className="flex-col flex">
-            <label htmlFor="name">Nazwa towaru lub usługi</label>
+            <label htmlFor="name">Name of product or service</label>
             <input value={services[i].name} onChange={e => {
                 let newArr = [...services]
                 newArr[i].name = e.target.value
                 setServices(newArr)
             }} className={inputStyles} type="text" id='name' name='name' />
-            <label htmlFor="ilosc">Ilość</label>
+            <label htmlFor="ilosc">Quantity</label>
             <input value={services[i].quantity} onChange={e => {
                 let newArr = [...services]
                 newArr[i].quantity = e.target.value
                 setServices(newArr)
             }} className={inputStyles} type="number" id='ilosc' name='ilosc' />
-            <label value={services[i].price} htmlFor="cena">Cena netto w zł</label>
+            <label value={services[i].price} htmlFor="cena">Net price in $</label>
             <input onChange={e => {
                 let newArr = [...services]
                 newArr[i].price = e.target.value
                 setServices(newArr)
             }} className={inputStyles} type="number" id='cena' name='cena' />
-            <button className={`${buttonStyles} bg-red-400 mt-4 max-w-max`} onClick={() => setServices(prev => prev.slice(0,i).concat(prev.slice(i+1)))}>Usuń</button>
+            <button className={`${buttonStyles} bg-red-400 mt-4 max-w-max`} onClick={() => setServices(prev => prev.slice(0,i).concat(prev.slice(i+1)))}>Delete</button>
         </div>
     )
 }

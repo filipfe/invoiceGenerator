@@ -17,7 +17,7 @@ export default function Services({setInvoice, invoice}) {
     return (
         <div className="flex flex-col">
             <div className="flex items-center gap-4 mb-4">
-                <h2 className="font-semibold text-2xl">Usługi</h2>
+                <h2 className="font-semibold text-2xl">Services</h2>
                 <button className={`${buttonStyles} bg-blue-400 hover:bg-blue-600 transition-colors`} onClick={() => setServices(prev => prev.concat(
                     {
                         name: '',

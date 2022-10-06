@@ -38,9 +38,9 @@ export default function Invoice({ invoice, seller }) {
                     <p>{buyer.postal} {buyer.city}</p>
                 </div>
             </div>
-            <h1 className="font-bold text-4xl text-center my-8">Faktura VAT {info.awayDate}</h1>
+            <h1 className="font-bold text-4xl text-center my-8">Invoice VAT {info.awayDate}</h1>
             <div className="grid grid-cols-invoice gap-x-8 gap-y-1">
-                <h3>L.p.</h3>
+                <h3>No.</h3>
                 <h3>Name of product or service</h3>
                 <h3>Quantity</h3>
                 <h3>Net price</h3>

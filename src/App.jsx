@@ -33,7 +33,7 @@ function App() {
       {active === 'invoice' ? <></> :
         <div className="flex items-center absolute left-20 top-12 gap-4">
           <h2 className="font-semibold text-xl">{seller ? seller.name : 'Sprzedawca'}</h2>
-          <button onClick={() => setActive(active === 'credentials' ? 'home' : 'credentials')} className={`${buttonStyles} ${active === 'credentials' ? 'bg-red-400' : 'bg-blue-400'}`}>{active === 'credentials' ? 'Powrót' : seller ? 'Zmień dane' : 'Dodaj dane'}</button>
+          <button onClick={() => setActive(active === 'credentials' ? 'home' : 'credentials')} className={`${buttonStyles} transition-colors ${active === 'credentials' ? 'bg-red-400 hover:bg-red-600' : 'bg-blue-400 hover:bg-blue-600'}`}>{active === 'credentials' ? 'Powrót' : seller ? 'Zmień dane' : 'Dodaj dane'}</button>
         </div>
       }
       {active === 'invoice' ? seller ? <Invoice invoice={invoice} seller={seller} /> : <button onClick={() => setActive('credentials')} className='text-red-400 font-semibold text-2xl'>Dodaj dane sprzedawcy</button> : active === 'credentials' ? <Credentials cred={seller} setCred={setSeller} /> :
@@ -43,8 +43,8 @@ function App() {
         <Buyers setInvoice={setInvoice} invoice={invoice.buyer} />
       </>}
       {active === 'credentials' ? <></> : <div className="absolute bottom-14 flex items-center gap-4 print:hidden">
-        <button onClick={() => setActive(active === 'invoice' ? 'home' : 'invoice')} className={`${buttonStyles} ${active === 'invoice' ? 'bg-red-400' : 'bg-green-400'}`}>{active === 'invoice' ? 'Powrót' : 'Wygeneruj fakturę'}</button>
-        {active === 'invoice' && seller ? <button onClick={() => window.print()} className={`${buttonStyles} bg-green-400`}>Drukuj</button> : <></>}
+        <button onClick={() => setActive(active === 'invoice' ? 'home' : 'invoice')} className={`${buttonStyles} transition-colors ${active === 'invoice' ? 'bg-red-400 hover:bg-red-600' : 'bg-green-400 hover:bg-green-600'}`}>{active === 'invoice' ? 'Powrót' : 'Wygeneruj fakturę'}</button>
+        {active === 'invoice' && seller ? <button onClick={() => window.print()} className={`${buttonStyles} bg-green-400 hover:bg-green-600 transition-colors`}>Drukuj</button> : <></>}
       </div>}
     </div>
   )

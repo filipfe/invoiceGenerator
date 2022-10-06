@@ -9,7 +9,7 @@ export default function Buyers({ setInvoice, invoice }) {
         <div className="flex flex-col">
             <div className="flex items-center gap-4 justify-between mb-4">
                 <h2 className="font-semibold text-2xl">Nabywca</h2>
-                {!buyer ? <button className={`${buttonStyles} bg-blue-400`} onClick={() => setBuyer(true)}>Nowy</button> : <></>}
+                {!buyer ? <button className={`${buttonStyles} bg-blue-400 hover:bg-blue-600 transition-colors`} onClick={() => setBuyer(true)}>Nowy</button> : <></>}
             </div>
             {buyer ?
                 <>

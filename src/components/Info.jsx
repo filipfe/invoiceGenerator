@@ -9,7 +9,7 @@ export default function Info({setInvoice, invoice}) {
         <div className="flex flex-col">
             <div className="flex items-center gap-4 justify-between mb-4">
                 <h2 className="font-semibold text-2xl">Ogólne informacje</h2>
-                {!active ? <button className={`${buttonStyles} bg-blue-400`} onClick={() => setActive(true)}>Dodaj</button> : <></>}
+                {!active ? <button className={`${buttonStyles} bg-blue-400 hover:bg-blue-600 transition-colors`} onClick={() => setActive(true)}>Dodaj</button> : <></>}
             </div>
             {active ?
                 <>

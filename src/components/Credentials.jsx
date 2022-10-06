@@ -26,8 +26,25 @@ const Form = ({setCred, cred}) => {
         localStorage.setItem('seller', JSON.stringify(seller))
     }
 
+    const handleRemove = () => {
+        setCred(null)
+        setSeller({
+            name: '',
+            company: '',
+            NIP: '',
+            address: '',
+            postal: '',
+            city: ''
+        })
+        localStorage.setItem('seller', JSON.stringify(null))
+    }
+
     const Save = () => {
-        return <button onClick={handleSave} className={`${buttonStyles} bg-green-400 mt-4 max-w-max`}>Zapisz</button>
+        return <button onClick={handleSave} className={`${buttonStyles} bg-green-400 hover:bg-green-600 transition-colors mt-4 max-w-max`}>Zapisz</button>
+    }
+
+    const Remove = () => {
+        return <button onClick={handleRemove} className={`${buttonStyles} bg-red-400 hover:bg-red-600 transition-colors mt-4 max-w-max`}>Usuń</button>
     }
 
     return (
@@ -44,7 +61,10 @@ const Form = ({setCred, cred}) => {
             <input className={inputStyles} value={seller.postal} required onChange={e => setSeller({...seller, postal: e.target.value})} type="text" id='kod' name='kod' />
             <label htmlFor="Miasto">Miasto</label>
             <input className={inputStyles} value={seller.city} required onChange={e => setSeller({...seller, city: e.target.value})} type="text" id='miasto' name='miasto' />
-            <Save />
+            <div className="flex items-center gap-4">
+                <Save />
+                {cred ? <Remove /> : <></>}
+            </div>
         </>
     )
 }

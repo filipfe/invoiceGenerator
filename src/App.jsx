@@ -2,10 +2,12 @@ import Services from "./components/Services"
 import Buyers from "./components/Buyer"
 import Info from "./components/Info"
 import Invoice from "./components/Invoice"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Credentials from "./components/Credentials"
+import Login from "./components/Login"
 
 const sellerFromLocalStorage = JSON.parse(localStorage.getItem('seller'))
+const loginFromLocalStorage = JSON.parse(localStorage.getItem('invoice_login'))
 
 function App() {
   const [invoice, setInvoice] = useState({
@@ -25,10 +27,15 @@ function App() {
       city: ''
     }
   })
+  const [logged, setLogged] = useState(false)
   const [seller, setSeller] = useState(sellerFromLocalStorage)
   const [active, setActive] = useState('home')
 
-  return (
+  useEffect(() => {
+    if(loginFromLocalStorage) return setLogged(true)
+  }, [])
+
+  if(logged) return (
     <div className="relative flex items-center justify-center h-screen gap-14 px-10">
       {active === 'invoice' ? <></> :
         <div className="flex items-center absolute left-20 top-12 gap-4">
@@ -48,6 +55,7 @@ function App() {
       </div>}
     </div>
   )
+  else return <Login setLogged={setLogged} />
 }
 
 

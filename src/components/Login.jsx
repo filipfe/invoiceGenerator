@@ -1,4 +1,5 @@
 import { useState } from "react"
+import logo from '../assets/logo.svg'
 
 export default function Login({ setLogged }) {
     const [credentials, setCredentials] = useState({
@@ -7,7 +8,7 @@ export default function Login({ setLogged }) {
     })
     
     const logIn = () => {
-        localStorage.setItem('invoice_login', JSON.stringify(credentials))
+        localStorage.setItem('invoice_login', JSON.stringify(credentials.email))
         return setLogged(true)
     }
 
@@ -27,7 +28,7 @@ export default function Login({ setLogged }) {
     }
 
     return (
-        <div className="flex items-center justify-center w-screen h-screen">
+        <div className="flex items-center justify-center w-screen h-screen flex-col sm:flex-row gap-28">
             <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
                 <h1 className="text-4xl font-bold">Log in</h1>
                 <input className="py-2 px-5 shadow-xl rounded-2xl" type="email" onChange={e => setCredentials(prev => {
@@ -42,9 +43,10 @@ export default function Login({ setLogged }) {
                         password: e.target.value
                     }
                 })} placeholder="Password" />
-                <button className="py-2 px-5 rounded-xl bg-blue-400 text-white">Log in</button>
-                <a className="text-blue-400 font-medium" href="https://services.divideproject.works/products/4">Gain access</a>
+                <button className="py-2 px-5 rounded-xl bg-[#852FF2] text-white">Log in</button>
+                <a className="text-[#852FF2] font-medium" href="https://services.divideproject.works/products/4">Gain access</a>
             </form>
+            <img className="max-w-[3in]" src={logo} alt="" />
         </div>
     )
 }

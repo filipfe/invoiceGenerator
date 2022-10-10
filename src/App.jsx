@@ -5,6 +5,7 @@ import Invoice from "./components/Invoice"
 import { useEffect, useState } from "react"
 import Credentials from "./components/Credentials"
 import Login from "./components/Login"
+import Loader from "./components/Loader"
 
 const sellerFromLocalStorage = JSON.parse(localStorage.getItem('seller'))
 const loginFromLocalStorage = JSON.parse(localStorage.getItem('invoice_login'))
@@ -27,15 +28,32 @@ function App() {
       city: ''
     }
   })
-  const [logged, setLogged] = useState(false)
+  const [available, setAvailable] = useState(undefined)
   const [seller, setSeller] = useState(sellerFromLocalStorage)
   const [active, setActive] = useState('home')
 
+  const checkIfAvailable = async userId => {
+    const response = await fetch('https://services.divideproject.works/api/user/orders', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            user_id: userId
+        })
+    }).then(res => res.json())
+    .then(data => data.map(order => order.product_id_id))
+    if(response.includes(4)) return setAvailable(true)
+    else return setAvailable(false)
+  }
+
   useEffect(() => {
-    if(loginFromLocalStorage) return setLogged(true)
+    if(loginFromLocalStorage) {
+      checkIfAvailable(loginFromLocalStorage)
+    } else setAvailable(false)
   }, [])
 
-  if(logged) return (
+  if(available) return (
     <div className="relative flex items-center justify-center h-screen gap-14 px-10">
       {active === 'invoice' ? <></> :
         <div className="flex items-center absolute left-20 top-12 gap-4">
@@ -55,7 +73,8 @@ function App() {
       </div>}
     </div>
   )
-  else return <Login setLogged={setLogged} />
+  if(available === undefined) return <Loader />
+  if(available === false) return <Login setAvailable={setAvailable} /> 
 }
 
 

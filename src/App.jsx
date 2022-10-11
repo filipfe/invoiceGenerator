@@ -4,7 +4,6 @@ import Info from "./components/Info"
 import Invoice from "./components/Invoice"
 import { useEffect, useState } from "react"
 import Credentials from "./components/Credentials"
-import Login from "./components/Login"
 import Loader from "./components/Loader"
 
 const sellerFromLocalStorage = JSON.parse(localStorage.getItem('seller'))
@@ -74,7 +73,7 @@ function App() {
     </div>
   )
   if(available === undefined) return <Loader />
-  if(available === false) return <Login setAvailable={setAvailable} /> 
+  if(available === false) return window.location.href = 'https://apps.divideproject.works'
 }
 
 

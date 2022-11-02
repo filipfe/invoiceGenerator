@@ -4,7 +4,6 @@ import Info from "./components/Info"
 import Invoice from "./components/Invoice"
 import { useEffect, useState } from "react"
 import Credentials from "./components/Credentials"
-import Loader from "./components/Loader"
 
 const sellerFromLocalStorage = JSON.parse(localStorage.getItem('seller'))
 const loginFromLocalStorage = JSON.parse(localStorage.getItem('invoice_login'))
@@ -27,30 +26,31 @@ function App() {
       city: ''
     }
   })
-  const [available, setAvailable] = useState(undefined)
+  // const [available, setAvailable] = useState(undefined)
   const [seller, setSeller] = useState(sellerFromLocalStorage)
   const [active, setActive] = useState('home')
 
-  const checkIfAvailable = async userId => {
-    const response = await fetch('https://services.divideproject.works/api/user/orders', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            user_id: userId
-        })
-    }).then(res => res.json())
-    .then(data => data.map(order => order.product_id_id))
-    if(response.includes(4)) return setAvailable(true)
-    else return setAvailable(false)
-  }
+  // const checkIfAvailable = async userId => {
+  //   const response = await fetch('https://services.divideproject.works/api/user/orders', {
+  //       method: 'POST',
+  //       headers: {
+  //           'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify({
+  //           user_id: userId
+  //       })
+  //   }).then(res => res.json())
+  //   .then(data => data.map(order => order.product_id_id))
+  //   if(response.includes(4)) return setAvailable(true)
+  //   else return setAvailable(false)
+  // }
+  let available = true;
 
-  useEffect(() => {
-    if(loginFromLocalStorage) {
-      checkIfAvailable(loginFromLocalStorage)
-    } else setAvailable(false)
-  }, [])
+  // useEffect(() => {
+  //   if(loginFromLocalStorage) {
+  //     checkIfAvailable(loginFromLocalStorage)
+  //   } else setAvailable(false)
+  // }, [])
 
   if(available) return (
     <div className="relative flex items-center justify-center h-screen gap-14 px-10">
@@ -72,7 +72,6 @@ function App() {
       </div>}
     </div>
   )
-  if(available === undefined) return <Loader />
   if(available === false) return window.location.href = 'https://apps.divideproject.works'
 }
 
